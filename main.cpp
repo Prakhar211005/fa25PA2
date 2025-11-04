@@ -91,7 +91,7 @@ int createLeafNodes(int freq[]) {
 int buildEncodingTree(int nextFree) {
     MinHeap heap;
 
-    // Push all leaf nodes (each character)
+    // Push all leaf nodes
     for (int i = 0; i < nextFree; ++i)
         heap.push(i, weightArr);
 
@@ -104,7 +104,7 @@ int buildEncodingTree(int nextFree) {
         weightArr[parent] = weightArr[left] + weightArr[right];
         leftArr[parent] = left;
         rightArr[parent] = right;
-        charArr[parent] = 0; // internal node
+        charArr[parent] = 0;
 
         heap.push(parent, weightArr);
     }
@@ -138,7 +138,7 @@ void generateCodes(int root, string codes[]) {
             continue;
         }
 
-        // Internal node: push right first so left is processed first
+        // pushed right first so left is processed first
         if (rightArr[node] != -1)
             st.push({rightArr[node], path + "1"});
         if (leftArr[node] != -1)
